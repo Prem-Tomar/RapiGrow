@@ -11,7 +11,7 @@ public class HikariConfig {
 
     @Bean
     public HikariDataSource dataSource() {
-        return DataSourceBuilder.create().type(HikariDataSource.class).password("Punitu37y5a#").url("jdbc:mysql://localhost:3306/RapiGrow").username("root").build();
+        return DataSourceBuilder.create().type(HikariDataSource.class).password("Vishu@894").url("jdbc:mysql://localhost:3306/premproject_api").username("root").build();
     }
 
 

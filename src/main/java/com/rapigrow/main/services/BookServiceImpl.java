@@ -1,6 +1,8 @@
 package com.rapigrow.main.services;
 
+import com.rapigrow.main.dao.BooksDao;
 import com.rapigrow.main.entities.Book;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class BookServiceImpl implements BookServiceInterface{
+
+
 //    @Override
 //    public List<Book> getAllBooks() {
 //        return null;
@@ -34,41 +38,51 @@ public class BookServiceImpl implements BookServiceInterface{
 //    public void updateBook(Book book, int bookId) {
 //
 //    }
+
+    @Autowired
+    private BooksDao bookDao;
+
+    //  This is after making connection to data base
     private static List<Book> list = new ArrayList<>();
 
-    static{
-        list.add(new Book(1,"Java Complete reference","prem Kumar Tiwari"));
-        list.add(new Book(12,"Java My World","prem "));
-        list.add(new Book(14,"The World Wide Web","Mr. Bansi LAl"));
-    }
+//    static{
+//        list.add(new Book(1,"Java Complete reference","prem Kumar Tiwari"));
+//        list.add(new Book(12,"Java My World","prem "));
+//        list.add(new Book(14,"The World Wide Web","Mr. Bansi LAl"));
+//    }
 
     public List<Book> getAllBooks(){
-        return list;
+        return bookDao.findAll();
     }
 
     //get single book by id
 
     public Book getBookById(int id){
-        Book book=null;
-      book=  list.stream().filter(e->e.getId()==id).findFirst().get();
-      return book;
+//        Book book=null;
+//      book=  list.stream().filter(e->e.getId()==id).findFirst().get();
+      return bookDao.getOne(id);
+//        return book;
     }
 
     public Book addBook(Book b){
-        list.add(b);
+//        list.add(b);
+        bookDao.save(b);
         return b;
     }
 
     public void deleteBook(int bookId) {
 
+//
+//            for(Book e:list){
+//                int x=e.getId();
+//                if(x==bookId){
+//                   list.remove(e);
+//                }
+//
+//            }
 
-            for(Book e:list){
-                int x=e.getId();
-                if(x==bookId){
-                   list.remove(e);
-                }
-
-            }
+       Book entity= bookDao.getOne(bookId);
+       bookDao.delete(entity);
         }
 
 
@@ -85,12 +99,15 @@ public class BookServiceImpl implements BookServiceInterface{
 
     public void updateBook(Book book,int bookId) {
 
-      list=  list.stream().map(b->{
-            if(b.getId()==bookId){
-                b.setTitle(book.getTitle());
-                b.setAuthor(book.getAuthor());
-            }
-            return b;
-        }).collect(Collectors.toList());
+//      list=  list.stream().map(b->{
+//            if(b.getId()==bookId){
+//                b.setTitle(book.getTitle());
+//                b.setAuthor(book.getAuthor());
+//            }
+//            return b;
+//        }).collect(Collectors.toList());
+
+       bookDao.save(book);
+
     }
 }
