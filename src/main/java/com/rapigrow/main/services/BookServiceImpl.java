@@ -1,17 +1,14 @@
 package com.rapigrow.main.services;
 
-import com.rapigrow.main.dao.BooksDao;
+import com.rapigrow.main.dao.BookRepository;
 import com.rapigrow.main.entities.Book;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
-public class BookServiceImpl implements BookServiceInterface{
+public class BookServiceImpl implements BookServiceInterface {
 
 
 //    @Override
@@ -40,10 +37,10 @@ public class BookServiceImpl implements BookServiceInterface{
 //    }
 
     @Autowired
-    private BooksDao bookDao;
+    private BookRepository bookRepository;
 
     //  This is after making connection to data base
-    private static List<Book> list = new ArrayList<>();
+//    private static List<Book> list = new ArrayList<>();
 
 //    static{
 //        list.add(new Book(1,"Java Complete reference","prem Kumar Tiwari"));
@@ -51,22 +48,22 @@ public class BookServiceImpl implements BookServiceInterface{
 //        list.add(new Book(14,"The World Wide Web","Mr. Bansi LAl"));
 //    }
 
-    public List<Book> getAllBooks(){
-        return bookDao.findAll();
+    public List<Book> getAllBooks() {
+        return bookRepository.findAll();
     }
 
     //get single book by id
 
-    public Book getBookById(int id){
+    public Book getBookById(int id) {
 //        Book book=null;
 //      book=  list.stream().filter(e->e.getId()==id).findFirst().get();
-      return bookDao.getOne(id);
+        return bookRepository.getReferenceById(id);
 //        return book;
     }
 
-    public Book addBook(Book b){
+    public Book addBook(Book b) {
 //        list.add(b);
-        bookDao.save(b);
+        bookRepository.save(b);
         return b;
     }
 
@@ -81,9 +78,9 @@ public class BookServiceImpl implements BookServiceInterface{
 //
 //            }
 
-       Book entity= bookDao.getOne(bookId);
-       bookDao.delete(entity);
-        }
+        Book entity = bookRepository.getReferenceById(bookId);
+        bookRepository.delete(entity);
+    }
 
 
 //    public void deleteBook(int bid){
@@ -97,7 +94,7 @@ public class BookServiceImpl implements BookServiceInterface{
 //    }
 
 
-    public void updateBook(Book book,int bookId) {
+    public void updateBook(Book book, int bookId) {
 
 //      list=  list.stream().map(b->{
 //            if(b.getId()==bookId){
@@ -106,8 +103,8 @@ public class BookServiceImpl implements BookServiceInterface{
 //            }
 //            return b;
 //        }).collect(Collectors.toList());
-
-       bookDao.save(book);
+// Validate your book before you save it
+        bookRepository.save(book);
 
     }
 }

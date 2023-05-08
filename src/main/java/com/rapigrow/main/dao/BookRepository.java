@@ -2,7 +2,9 @@ package com.rapigrow.main.dao;
 
 import com.rapigrow.main.entities.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface BooksDao extends JpaRepository<Book,Integer> {
+@Repository
+public interface BookRepository extends JpaRepository<Book,Integer> {
 
 }
