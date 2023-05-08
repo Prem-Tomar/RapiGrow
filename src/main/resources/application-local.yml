@@ -6,3 +6,9 @@ rapigrow:
     port: 3306
     name: RapiGrow
     url: jdbc:mysql://
+server:
+  servlet:
+    context-path: /api/v1
+logging:
+  level:
+    web: DEBUG
