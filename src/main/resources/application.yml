@@ -1,8 +1,11 @@
-rapigrow:
-  db:
-    username: root
-    password: Punitu37y5a#
-    host: localhost
-    port: 3306
-    name: RapiGrow
-    url: jdbc:mysql://
+spring.profiles.active: local
+# DB configuration string
+# Create an application-local.yml file in resource folder and copy the below configuration
+#rapigrow:
+#  db:
+#    username: root
+#    password: Punitu37y5a#
+#    host: localhost
+#    port: 3306
+#    name: RapiGrow
+#    url: jdbc:mysql://
