@@ -24,7 +24,7 @@ public class RapiGrowExceptionHandler extends ResponseEntityExceptionHandler {
      */
     @ExceptionHandler(value = {RapiGrowRuntimeException.class})
     public ResponseEntity<Object> handleRapiGrowRuntimeException(RapiGrowRuntimeException ex, WebRequest request) {
-        return handleExceptionInternal(ex, ex.getBody(), new HttpHeaders(), HttpStatusCode.valueOf(ex.getStatusCode()), request);
+        return handleExceptionInternal(ex, ex.getBody(), new HttpHeaders(), ex.getStatusCode(), request);
     }
 
 
