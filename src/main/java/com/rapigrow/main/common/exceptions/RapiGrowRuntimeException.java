@@ -4,13 +4,16 @@ import lombok.Getter;
 import lombok.ToString;
 
 @ToString(callSuper = true)
-public class RapiGrowRuntimeException extends RuntimeException{
+public class RapiGrowRuntimeException extends RuntimeException {
     private final String message;
     private final int statusCode;
-    public RapiGrowRuntimeException(int statusCode, String message, Exception ex) {
+    private final Object body;
+
+    public <T> RapiGrowRuntimeException(int statusCode, String message, T body, Exception ex) {
         super(ex);
         this.statusCode = statusCode;
         this.message = message;
+        this.body = body;
     }
 
     public int getStatusCode() {
@@ -20,5 +23,9 @@ public class RapiGrowRuntimeException extends RuntimeException{
     @Override
     public String getMessage() {
         return this.message;
+    }
+
+    public Object getBody() {
+        return body;
     }
 }

@@ -5,7 +5,8 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public class UserNotAuthorisedException extends RapiGrowRuntimeException {
 
-    public UserNotAuthorisedException(int statusCode, String message, Exception ex) {
-        super(statusCode, message, ex);
+
+    public <T> UserNotAuthorisedException(int statusCode, String message, T body, Exception ex) {
+        super(statusCode, message, body, ex);
     }
 }
