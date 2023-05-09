@@ -14,6 +14,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @Order(0)
 public class RapiGrowExceptionHandler extends ResponseEntityExceptionHandler {
 
+    /**
+     * This is handler method for exceptions thrown by Rest Controllers
+     * @see ResponseEntityExceptionHandler
+     * @see RapiGrowRuntimeException
+     * @param ex Exception object of type {@link RapiGrowRuntimeException}
+     * @param request of type {@link WebRequest}
+     * @return {@link ResponseEntity}
+     */
     @ExceptionHandler(value = {RapiGrowRuntimeException.class})
     public ResponseEntity<Object> handleRapiGrowRuntimeException(RapiGrowRuntimeException ex, WebRequest request) {
         return handleExceptionInternal(ex, ex.getBody(), new HttpHeaders(), HttpStatusCode.valueOf(ex.getStatusCode()), request);
