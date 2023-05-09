@@ -12,3 +12,9 @@ server:
 logging:
   level:
     web: DEBUG
+
+spring:
+  cloud:
+    gcp:
+      logging:
+        enabled: true

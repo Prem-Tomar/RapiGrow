@@ -8,6 +8,6 @@ public class UserNotAuthorisedException extends RapiGrowRuntimeException {
 
 
     public <T> UserNotAuthorisedException(HttpStatus statusCode, String message, T body, Exception ex) {
-        super(statusCode, message, body, ex);
+        super(statusCode, message, ex, body);
     }
 }
