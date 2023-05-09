@@ -6,6 +6,7 @@ rapigrow:
     port: 3306
     name: RapiGrow
     url: jdbc:mysql://
+    dialect: org.hibernate.dialect.MySQL8Dialect
 server:
   servlet:
     context-path: /api/v1

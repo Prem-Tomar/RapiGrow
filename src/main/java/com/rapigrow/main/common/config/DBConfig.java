@@ -14,11 +14,14 @@ public class DBConfig {
 
     @Autowired
     private HikariDataSource dataSource;
+    @Autowired
+    private ApplicationConfig applicationConfig;
 
     @Bean(name = "entityManagerFactory")
     public EntityManagerFactory entityManagerFactory() {
+        var db = applicationConfig.getDb();
         HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
-        jpaVendorAdapter.setDatabasePlatform("org.hibernate.dialect.MySQL8Dialect");
+        jpaVendorAdapter.setDatabasePlatform(db.getDialect());
         jpaVendorAdapter.setGenerateDdl(true);
         jpaVendorAdapter.setShowSql(true);
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();

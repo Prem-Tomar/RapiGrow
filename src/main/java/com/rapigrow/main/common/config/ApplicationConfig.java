@@ -34,5 +34,7 @@ public class ApplicationConfig {
         private String name;
         @Nonnull
         private String url;
+
+        private String dialect;
     }
 }
