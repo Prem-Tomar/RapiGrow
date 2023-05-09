@@ -1,13 +1,18 @@
 package com.rapigrow.main.services;
 
+import com.rapigrow.main.common.interceptors.Logged;
 import com.rapigrow.main.dao.BookRepository;
 import com.rapigrow.main.entities.Book;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
+@Slf4j
 public class BookServiceImpl implements BookServiceInterface {
 
 
@@ -106,5 +111,10 @@ public class BookServiceImpl implements BookServiceInterface {
 // Validate your book before you save it
         bookRepository.save(book);
 
+    }
+
+    @Scheduled(fixedRate = 1, timeUnit = TimeUnit.SECONDS)
+    public void scheduledMethod() {
+        log.info("Working in service");
     }
 }
