@@ -11,11 +11,10 @@ public class SecurityServiceImpl implements SecurityService {
 
 
     @Autowired
-    private FirebaseApp firebaseApp;
+   private FirebaseAuth firebaseAuth;
 
     @Override
     public String generateTokenForUser(String userEmailOrUid) throws FirebaseAuthException {
-        var firebaseAuthApp = FirebaseAuth.getInstance(firebaseApp);
-        return firebaseAuthApp.createCustomToken(userEmailOrUid);
+        return firebaseAuth.createCustomToken(userEmailOrUid);
     }
 }

@@ -8,12 +8,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -33,26 +33,39 @@ public class WebSecurityConfig {
     SecurityProperties restSecProps;
     @Autowired
     private ObjectMapper objectMapper;
+
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception{
-        httpSecurity.authorizeHttpRequests()
-                .requestMatchers("/api/v1/users/registerUser").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .and()
-                .logout()
-                .and()
+    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+
+        httpSecurity
                 .cors()
+                .configurationSource(corsConfigurationSource())
                 .and()
                 .csrf()
-                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler());
+                .disable()
+
+                .httpBasic()
+                .disable()
+
+
+                .authorizeHttpRequests(
+                        r -> r.requestMatchers(
+                                        restSecProps.getAllowedPublicApis().toArray(String[]::new)
+                                )
+                                .permitAll()
+                                .anyRequest()
+                                .authenticated()
+                ).exceptionHandling()
+                .authenticationEntryPoint(restAuthenticationEntryPoint()).and()
+                .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
         return httpSecurity.build();
     }
 
+
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -83,4 +96,11 @@ public class WebSecurityConfig {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
+    // Use this method if any scenario requires ignoring some urls
+//    @Bean
+//    public WebSecurityCustomizer webSecurityCustomizer() {
+//    return (web) -> web.ignoring().requestMatchers(restSecProps.getAllowedPublicApis().toArray(String[]::new));
+
+//    }
 }
