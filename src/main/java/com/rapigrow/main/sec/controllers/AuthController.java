@@ -18,7 +18,7 @@ public class AuthController {
     //@RequestMapping(value = "/add",method = RequestMethod.GET)
     @GetMapping("/add")
     public int add(@RequestParam int a, @RequestParam int b) {
-        return a+b;
+        return a + b;
     }
 
     @PostMapping("/user")
@@ -34,7 +34,10 @@ public class AuthController {
         return ResponseEntity.ok(userResponseDTO);
     }
 
-
+    @GetMapping("login")
+    public ResponseEntity<String> login() {
+        return ResponseEntity.ok("Ok");
+    }
 
 
 }
