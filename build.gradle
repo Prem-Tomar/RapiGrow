@@ -32,6 +32,9 @@ dependencies {
 //	implementation 'org.springframework.session:spring-session-core'
     // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-gcp-starter-logging
     implementation 'org.springframework.cloud:spring-cloud-gcp-starter-logging:1.2.8.RELEASE'
+    // https://mvnrepository.com/artifact/com.google.firebase/firebase-admin
+    implementation 'com.google.firebase:firebase-admin:9.1.1'
+
 
 
     compileOnly 'org.projectlombok:lombok'
