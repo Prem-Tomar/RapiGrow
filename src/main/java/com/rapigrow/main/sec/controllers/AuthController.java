@@ -3,8 +3,10 @@ package com.rapigrow.main.sec.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.firebase.auth.FirebaseAuthException;
 import com.rapigrow.main.sec.dto.UserRequestDTO;
 import com.rapigrow.main.sec.dto.UserResponseDTO;
+import com.rapigrow.main.sec.services.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,30 +17,26 @@ public class AuthController {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private SecurityService service;
+
     //@RequestMapping(value = "/add",method = RequestMethod.GET)
     @GetMapping("/add")
     public int add(@RequestParam int a, @RequestParam int b) {
-        return a+b;
+        return a + b;
     }
 
     @PostMapping("/user")
 
     public ResponseEntity<UserResponseDTO> userDetails(@RequestBody UserRequestDTO body) throws JsonProcessingException {
-
-//        String parseBody = objectMapper.writeValueAsString(body);
-
         UserResponseDTO userResponseDTO = new UserResponseDTO();
         userResponseDTO.setConfidentialInformation(body.getUserName());
-//        System.out.println(parseBody);
-//         return ResponseEntity.status(202).body(userResponseDTO);
         return ResponseEntity.ok(userResponseDTO);
     }
 
-
-
+    @GetMapping("login")
+    public ResponseEntity<String> login() throws FirebaseAuthException {
+        return ResponseEntity.ok(service.generateTokenForUser("prem.tomar.gwl@gmail.com"));
+    }
 
 }
-
-
-//{"userName":"test","abb":"test1","userName1":"test2"}
-//{"userName":"test","password":null}
