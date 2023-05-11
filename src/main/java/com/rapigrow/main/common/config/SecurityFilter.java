@@ -34,8 +34,8 @@ public class SecurityFilter extends OncePerRequestFilter {
 //    @Autowired
 //    private SecurityProperties restSecProps;
 
-@Autowired
-private CookieService cookieUtils;
+    @Autowired
+    private CookieService cookieUtils;
 
     @Autowired
     private SecurityProperties securityProps;

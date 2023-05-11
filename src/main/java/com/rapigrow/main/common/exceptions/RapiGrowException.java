@@ -1,6 +1,5 @@
 package com.rapigrow.main.common.exceptions;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import org.springframework.http.HttpStatus;
