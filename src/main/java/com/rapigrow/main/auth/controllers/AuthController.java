@@ -53,6 +53,7 @@ public class AuthController {
     // TODO: User basic auth to capture user credentials from client
     // TODO: Validate username and password, fetch the UID from database
     // TODO: Use uid to JWT token for user
+    // TODO: Change user request and response DTOs to reflect actual user information consumed and produced
 
 
 
