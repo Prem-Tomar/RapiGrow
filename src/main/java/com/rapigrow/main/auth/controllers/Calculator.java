@@ -1,6 +1,5 @@
-package com.rapigrow.main.sec.controllers;
+package com.rapigrow.main.auth.controllers;
 
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

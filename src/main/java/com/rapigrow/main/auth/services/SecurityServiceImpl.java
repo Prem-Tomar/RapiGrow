@@ -1,6 +1,5 @@
-package com.rapigrow.main.sec.services;
+package com.rapigrow.main.auth.services;
 
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import org.springframework.beans.factory.annotation.Autowired;

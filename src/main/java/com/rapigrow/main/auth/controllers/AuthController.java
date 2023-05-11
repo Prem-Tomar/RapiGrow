@@ -1,12 +1,12 @@
-package com.rapigrow.main.sec.controllers;
+package com.rapigrow.main.auth.controllers;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.firebase.auth.FirebaseAuthException;
-import com.rapigrow.main.sec.dto.UserRequestDTO;
-import com.rapigrow.main.sec.dto.UserResponseDTO;
-import com.rapigrow.main.sec.services.SecurityService;
+import com.rapigrow.main.auth.dto.UserRequestDTO;
+import com.rapigrow.main.auth.dto.UserResponseDTO;
+import com.rapigrow.main.auth.services.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

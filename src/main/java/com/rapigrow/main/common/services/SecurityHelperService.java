@@ -1,7 +1,7 @@
 package com.rapigrow.main.common.services;
 
 import com.google.auth.Credentials;
-import com.rapigrow.main.sec.models.User;
+import com.rapigrow.main.auth.models.User;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;

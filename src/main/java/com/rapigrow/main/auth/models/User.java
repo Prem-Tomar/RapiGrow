@@ -1,4 +1,4 @@
-package com.rapigrow.main.sec.models;
+package com.rapigrow.main.auth.models;
 
 import lombok.Getter;
 import lombok.Setter;

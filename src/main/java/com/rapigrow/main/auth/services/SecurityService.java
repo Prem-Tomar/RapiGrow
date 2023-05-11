@@ -1,4 +1,4 @@
-package com.rapigrow.main.sec.services;
+package com.rapigrow.main.auth.services;
 
 import com.google.firebase.auth.FirebaseAuthException;
 

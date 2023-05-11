@@ -1,4 +1,4 @@
-package com.rapigrow.main.sec.dto;
+package com.rapigrow.main.auth.dto;
 
 import lombok.Getter;
 import lombok.Setter;
