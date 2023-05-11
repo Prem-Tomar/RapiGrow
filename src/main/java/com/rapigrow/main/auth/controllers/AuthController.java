@@ -47,4 +47,13 @@ public class AuthController {
         return ResponseEntity.ok(responseDTO);
     }
 
+    // TODO: create signup for user using firebase sdk
+    // TODO: save all the information received from creating customer
+    // TODO: Keep data normalised for meta information and primary user information
+    // TODO: User basic auth to capture user credentials from client
+    // TODO: Validate username and password, fetch the UID from database
+    // TODO: Use uid to JWT token for user
+
+
+
 }
