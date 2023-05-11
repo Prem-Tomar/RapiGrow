@@ -3,7 +3,7 @@ package com.rapigrow.main.auth.services;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
-import com.rapigrow.main.sec.dto.UserRequestDTO;
+import com.rapigrow.main.auth.dto.UserRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
