@@ -30,13 +30,21 @@ public class AuthController {
 
     public ResponseEntity<UserResponseDTO> userDetails(@RequestBody UserRequestDTO body) throws JsonProcessingException {
         UserResponseDTO userResponseDTO = new UserResponseDTO();
-        userResponseDTO.setConfidentialInformation(body.getUserName());
+        userResponseDTO.setConfidentialInformation(body.getUsername());
         return ResponseEntity.ok(userResponseDTO);
     }
 
     @GetMapping("login")
     public ResponseEntity<String> login() throws FirebaseAuthException {
         return ResponseEntity.ok(service.generateTokenForUser("prem.tomar.gwl@gmail.com"));
+    }
+
+    @PostMapping("signup")
+    public ResponseEntity<UserResponseDTO> createUser(@RequestBody UserRequestDTO body) throws FirebaseAuthException {
+        var user = service.createUserOnFireBase(body);
+        UserResponseDTO responseDTO = new UserResponseDTO();
+        responseDTO.setConfidentialInformation(user);
+        return ResponseEntity.ok(responseDTO);
     }
 
 }

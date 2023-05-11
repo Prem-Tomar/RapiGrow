@@ -7,7 +7,6 @@ public class ObjectHelper {
 
     @Bean
     public ObjectMapper getObjectMapper(){
-
         return new ObjectMapper();
     }
 }
