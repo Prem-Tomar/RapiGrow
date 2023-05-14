@@ -88,6 +88,7 @@ public class SecurityFilter extends OncePerRequestFilter {
                 authorities.add(new SimpleGrantedAuthority("SUPER"));
             }*/
             // Handle Other roles
+            assert decodedToken != null;
             decodedToken.getClaims().forEach((k, v) -> authorities.add(new SimpleGrantedAuthority(k)));
             // Set security context
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, new Credentials(type, decodedToken, token, sessionCookieValue), authorities);
