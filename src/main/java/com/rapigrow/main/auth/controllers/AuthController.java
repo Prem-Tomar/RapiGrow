@@ -35,8 +35,8 @@ public class AuthController {
     }
 
     @GetMapping("login")
-    public ResponseEntity<String> login() throws FirebaseAuthException {
-        return ResponseEntity.ok(service.generateTokenForUser("prem.tomar.gwl@gmail.com"));
+    public ResponseEntity<String> login(@RequestParam String email) throws FirebaseAuthException {
+        return ResponseEntity.ok(service.generateTokenForUser(email));
     }
 
     @PostMapping("signup")
@@ -58,7 +58,6 @@ public class AuthController {
     // TODO: Validate username and password, fetch the UID from database
     // TODO: Use uid to JWT token for user
     // TODO: Change user request and response DTOs to reflect actual user information consumed and produced
-
 
 
 }

@@ -56,9 +56,9 @@ public class WebSecurityConfig {
                                 .anyRequest()
                                 .authenticated()
                 )
-                /*.exceptionHandling()
+                .exceptionHandling()
                 .authenticationEntryPoint(restAuthenticationEntryPoint())
-                .and()*/
+                .and()
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
