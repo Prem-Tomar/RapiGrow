@@ -25,7 +25,8 @@ public class AuthController {
     @Autowired
     private SecurityService service;
 
-    //@RequestMapping(value = "/add",method = RequestMethod.GET)
+    // Keeping it for future reference
+    // @RequestMapping(value = "/add",method = RequestMethod.GET)
     @GetMapping("/add")
     public int add(@RequestParam int a, @RequestParam int b) {
         return a + b;
