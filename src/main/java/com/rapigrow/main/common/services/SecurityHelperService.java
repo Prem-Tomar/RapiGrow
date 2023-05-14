@@ -15,9 +15,6 @@ public class SecurityHelperService {
     @Autowired
     HttpServletRequest httpServletRequest;
 
-//    @Autowired
-//    CookieUtils cookieUtils;
-
     @Autowired
     SecurityProperties securityProps;
 

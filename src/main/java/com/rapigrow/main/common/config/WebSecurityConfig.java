@@ -55,8 +55,10 @@ public class WebSecurityConfig {
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated()
-                ).exceptionHandling()
-                .authenticationEntryPoint(restAuthenticationEntryPoint()).and()
+                )
+                /*.exceptionHandling()
+                .authenticationEntryPoint(restAuthenticationEntryPoint())
+                .and()*/
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
@@ -70,6 +72,7 @@ public class WebSecurityConfig {
     }
 
     @Bean
+    @Deprecated
     public AuthenticationEntryPoint restAuthenticationEntryPoint() {
         return (httpServletRequest, httpServletResponse, e) -> {
             Map<String, Object> errorObject = new HashMap<>();

@@ -3,6 +3,7 @@ package com.rapigrow.main.common.config;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
+import com.rapigrow.main.common.exceptions.RapiGrowRuntimeException;
 import com.rapigrow.main.common.services.CookieService;
 import com.rapigrow.main.common.services.SecurityHelperService;
 import com.rapigrow.main.auth.models.User;
@@ -31,9 +32,6 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Autowired
     private SecurityHelperService securityService;
 
-//    @Autowired
-//    private SecurityProperties restSecProps;
-
     @Autowired
     private CookieService cookieUtils;
 
@@ -43,13 +41,16 @@ public class SecurityFilter extends OncePerRequestFilter {
     private FirebaseAuth firebaseAuth;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
-        authorize(request);
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        try {
+            authorize(request);
+        } catch (FirebaseAuthException e) {
+            throw new RuntimeException(e);
+        }
         filterChain.doFilter(request, response);
     }
 
-    private void authorize(HttpServletRequest request) {
+    private void authorize(HttpServletRequest request) throws FirebaseAuthException {
         String sessionCookieValue = null;
         FirebaseToken decodedToken = null;
         Credentials.CredentialType type = null;
@@ -60,16 +61,15 @@ public class SecurityFilter extends OncePerRequestFilter {
         try {
             if (sessionCookie != null) {
                 sessionCookieValue = sessionCookie.getValue();
-                decodedToken = firebaseAuth.verifySessionCookie(sessionCookieValue,
-                        securityProps.getFirebaseProps().isEnableCheckSessionRevoked());
+                decodedToken = firebaseAuth.verifySessionCookie(sessionCookieValue, securityProps.getFirebaseProps().isEnableCheckSessionRevoked());
                 type = Credentials.CredentialType.SESSION;
-            } else if (!strictServerSessionEnabled && token != null && !token.equals("null")
-                    && !token.equalsIgnoreCase("undefined")) {
+            } else if (!strictServerSessionEnabled && token != null && !token.equals("null") && !token.equalsIgnoreCase("undefined")) {
                 decodedToken = firebaseAuth.verifyIdToken(token);
                 type = Credentials.CredentialType.ID_TOKEN;
             }
         } catch (FirebaseAuthException e) {
-            log.error("Firebase Exception:: ", e.getLocalizedMessage());
+//            log.error("Firebase Exception:: ", e.getLocalizedMessage());
+            throw e;
         }
         List<GrantedAuthority> authorities = new ArrayList<>();
         User user = firebaseTokenToUserDto(decodedToken);
@@ -89,8 +89,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             // Handle Other roles
             decodedToken.getClaims().forEach((k, v) -> authorities.add(new SimpleGrantedAuthority(k)));
             // Set security context
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user,
-                    new Credentials(type, decodedToken, token, sessionCookieValue), authorities);
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, new Credentials(type, decodedToken, token, sessionCookieValue), authorities);
             authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
