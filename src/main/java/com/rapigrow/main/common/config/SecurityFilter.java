@@ -76,7 +76,7 @@ public class SecurityFilter extends OncePerRequestFilter {
         // Handle roles
         if (user != null) {
             // Handle Super Role
-            if (securityProps.getSuperAdmins().contains(user.getEmail())) {
+//            if (securityProps.getSuperAdmins().contains(user.getEmail())) {
 //                if (!decodedToken.getClaims().containsKey(RoleConstants.ROLE_SUPER)) {
 //                    try {
 //                        securityRoleService.addRole(decodedToken.getUid(), RoleConstants.ROLE_SUPER);
@@ -84,8 +84,8 @@ public class SecurityFilter extends OncePerRequestFilter {
 //                        log.error("Super Role registeration expcetion ", e);
 //                    }
 //                }
-                authorities.add(new SimpleGrantedAuthority("SUPER"));
-            }
+//                authorities.add(new SimpleGrantedAuthority("SUPER"));
+//            }
             // Handle Other roles
             decodedToken.getClaims().forEach((k, v) -> authorities.add(new SimpleGrantedAuthority(k)));
             // Set security context
