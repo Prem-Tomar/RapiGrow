@@ -12,11 +12,12 @@ import org.springframework.lang.Nullable;
 @AllArgsConstructor
 @ToString
 public class ResponseDTO<T> {
+    @NonNull
+    private String message;
     @Nullable
     private T data;
     @Nullable
     private Object error;
-    @NonNull
-    private String message;
+
 
 }
