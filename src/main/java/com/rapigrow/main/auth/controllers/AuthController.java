@@ -41,10 +41,14 @@ public class AuthController {
 
     @PostMapping("signup")
     public ResponseEntity<UserResponseDTO> createUser(@RequestBody UserRequestDTO body) throws FirebaseAuthException {
-        var user = service.createUserOnFireBase(body);
-        UserResponseDTO responseDTO = new UserResponseDTO();
-        responseDTO.setConfidentialInformation(user);
-        return ResponseEntity.ok(responseDTO);
+        try {
+            var user = service.createUserOnFireBase(body);
+            UserResponseDTO responseDTO = new UserResponseDTO();
+            responseDTO.setConfidentialInformation(user);
+            return ResponseEntity.ok(responseDTO);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
 }
