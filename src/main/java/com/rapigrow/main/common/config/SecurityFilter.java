@@ -74,17 +74,19 @@ public class SecurityFilter extends OncePerRequestFilter {
         User user = firebaseTokenToUserDto(decodedToken);
         // Handle roles
         if (user != null) {
+
+            // Open this code in case roles functionality is required
             // Handle Super Role
-//            if (securityProps.getSuperAdmins().contains(user.getEmail())) {
-//                if (!decodedToken.getClaims().containsKey(RoleConstants.ROLE_SUPER)) {
-//                    try {
-//                        securityRoleService.addRole(decodedToken.getUid(), RoleConstants.ROLE_SUPER);
-//                    } catch (Exception e) {
-//                        log.error("Super Role registeration expcetion ", e);
-//                    }
-//                }
-//                authorities.add(new SimpleGrantedAuthority("SUPER"));
-//            }
+            /*if (securityProps.getSuperAdmins().contains(user.getEmail())) {
+                if (!decodedToken.getClaims().containsKey(RoleConstants.ROLE_SUPER)) {
+                    try {
+                        securityRoleService.addRole(decodedToken.getUid(), RoleConstants.ROLE_SUPER);
+                    } catch (Exception e) {
+                        log.error("Super Role registeration expcetion ", e);
+                    }
+                }
+                authorities.add(new SimpleGrantedAuthority("SUPER"));
+            }*/
             // Handle Other roles
             decodedToken.getClaims().forEach((k, v) -> authorities.add(new SimpleGrantedAuthority(k)));
             // Set security context
