@@ -2,6 +2,7 @@ package com.rapigrow.main.sec2;
 
 import com.rapigrow.main.entities.Book;
 import com.rapigrow.main.services.BookServiceImpl;
+import com.rapigrow.main.services.BookServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,15 +12,22 @@ import java.util.List;
 @RestController
 
 public class ControllerBook {
-//    @Autowired
-//    private BookServiceImpl bookService;
-    private BookServiceImpl bookService=new BookServiceImpl();
+    @Autowired
+    private BookServiceInterface bookService;
+
 
     @GetMapping("books")
     public List<Book> getBooks() {
 
         System.out.println("Chal Gy kya");
         return this.bookService.getAllBooks();
+    }
+
+    @GetMapping("check")
+    public String check() {
+
+        System.out.println("Chal Gy kya");
+        return "This is  working";
     }
     @GetMapping("/books/{id}")
     public Book getBook( @PathVariable("id") int id){
@@ -32,6 +40,8 @@ public class ControllerBook {
         System.out.println(book);
         return b;
     }
+
+
 
     @PostMapping("bookswithresponse")
     public ResponseEntity<Book> addBook(@RequestBody Book book){

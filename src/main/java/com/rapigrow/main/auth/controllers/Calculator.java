@@ -1,14 +1,17 @@
 package com.rapigrow.main.auth.controllers;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "calulatefunction")
 public class Calculator {
 
     @GetMapping("/multiply")
-    public int mul(@RequestParam int a, @RequestParam int b){
-        return a*b;
+    public int mul(@RequestParam int a, @RequestParam int b) {
+        return a * b;
     }
 
 //    @PostMapping("post")
@@ -16,31 +19,28 @@ public class Calculator {
 //        return a*b;
 //    }
 
-@GetMapping("fire")
-public String check(){
+    @GetMapping("fire")
+    public String check() {
         return "this is check";
-}
+    }
 
 
     @GetMapping("/Sub")
-    public int sub(@RequestParam int a, @RequestParam int b){
-        return a-b;
+    public int sub(@RequestParam int a, @RequestParam int b) {
+        return a - b;
     }
 
     @GetMapping("/div")
-    public String divide(@RequestParam int a, @RequestParam int b){
+    public String divide(@RequestParam int a, @RequestParam int b) {
 
-        if(b!=0){
-            float ans=a/b;
-            String s=String.valueOf(ans);
+        if (b != 0) {
+            float ans = a / b;
+            String s = String.valueOf(ans);
             return s;
-        }
-        else{
+        } else {
             return "Can Not Divide By Zero";
         }
     }
-
-
 
 
 }

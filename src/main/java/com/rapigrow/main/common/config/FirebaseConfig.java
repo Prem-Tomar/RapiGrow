@@ -19,10 +19,15 @@ public class FirebaseConfig {
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         FirebaseOptions options = null;
 
-        try (InputStream is = classloader.getResourceAsStream("firebase_config.json")) {
+        try (InputStream is = classloader.getResourceAsStream("serviceAccountKey.json")) {
             options = FirebaseOptions.builder()
                     .setCredentials(GoogleCredentials.fromStream(Objects.requireNonNull(is)))
                     .build();
+
+//            options = new FirebaseOptions.Builder()
+//                    .setCredentials(GoogleCredentials.fromStream(Objects.requireNonNull(is)))
+//                    .setDatabaseUrl("https://rapigrow-21156-default-rtdb.asia-southeast1.firebasedatabase.app")
+//                    .build();
         }
 
         return FirebaseApp.initializeApp(options);

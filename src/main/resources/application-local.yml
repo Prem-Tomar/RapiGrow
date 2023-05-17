@@ -1,10 +1,10 @@
 rapigrow:
   db:
     username: root
-    password: Punitu37y5a#
+    password: Vishu@894
     host: localhost
     port: 3306
-    name: RapiGrow
+    name: premproject_api
     url: jdbc:mysql://
     dialect: org.hibernate.dialect.MySQL8Dialect
 server:

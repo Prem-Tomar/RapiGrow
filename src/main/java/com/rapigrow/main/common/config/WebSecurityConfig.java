@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -56,9 +57,9 @@ public class WebSecurityConfig {
                                 .anyRequest()
                                 .authenticated()
                 )
-                /*.exceptionHandling()
+                .exceptionHandling()
                 .authenticationEntryPoint(restAuthenticationEntryPoint())
-                .and()*/
+                .and()
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
@@ -101,9 +102,9 @@ public class WebSecurityConfig {
     }
 
     // Use this method if any scenario requires ignoring some urls
-//    @Bean
-//    public WebSecurityCustomizer webSecurityCustomizer() {
-//    return (web) -> web.ignoring().requestMatchers(restSecProps.getAllowedPublicApis().toArray(String[]::new));
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+    return (web) -> web.ignoring().requestMatchers(restSecProps.getAllowedPublicApis().toArray(String[]::new));
 
-//    }
+    }
 }

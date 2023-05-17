@@ -11,6 +11,8 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = {"com.rapigrow.main"})
 public class MainApplication {
     public static void main(String[] args) {
+
+
         ApplicationContext context = SpringApplication.run(MainApplication.class, args);
     }
 }
