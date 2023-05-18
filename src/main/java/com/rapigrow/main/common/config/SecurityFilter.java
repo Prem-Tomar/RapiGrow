@@ -68,25 +68,27 @@ public class SecurityFilter extends OncePerRequestFilter {
                 type = Credentials.CredentialType.ID_TOKEN;
             }
         } catch (FirebaseAuthException e) {
-//            log.error("Firebase Exception:: ", e.getLocalizedMessage());
             throw e;
         }
         List<GrantedAuthority> authorities = new ArrayList<>();
         User user = firebaseTokenToUserDto(decodedToken);
         // Handle roles
         if (user != null) {
+
+            // Open this code in case roles functionality is required
             // Handle Super Role
-            if (securityProps.getSuperAdmins().contains(user.getEmail())) {
-//                if (!decodedToken.getClaims().containsKey(RoleConstants.ROLE_SUPER)) {
-//                    try {
-//                        securityRoleService.addRole(decodedToken.getUid(), RoleConstants.ROLE_SUPER);
-//                    } catch (Exception e) {
-//                        log.error("Super Role registeration expcetion ", e);
-//                    }
-//                }
+            /*if (securityProps.getSuperAdmins().contains(user.getEmail())) {
+                if (!decodedToken.getClaims().containsKey(RoleConstants.ROLE_SUPER)) {
+                    try {
+                        securityRoleService.addRole(decodedToken.getUid(), RoleConstants.ROLE_SUPER);
+                    } catch (Exception e) {
+                        log.error("Super Role registeration expcetion ", e);
+                    }
+                }
                 authorities.add(new SimpleGrantedAuthority("SUPER"));
-            }
+            }*/
             // Handle Other roles
+            assert decodedToken != null;
             decodedToken.getClaims().forEach((k, v) -> authorities.add(new SimpleGrantedAuthority(k)));
             // Set security context
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, new Credentials(type, decodedToken, token, sessionCookieValue), authorities);
@@ -108,63 +110,4 @@ public class SecurityFilter extends OncePerRequestFilter {
         }
         return user;
     }
-//    @Override
-//    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-//        verifyToken(request);
-//        filterChain.doFilter(request, response);
-//    }
-//
-//    private void verifyToken(HttpServletRequest request) {
-//        String session = null;
-//        FirebaseToken decodedToken = null;
-//        Credentials.CredentialType type = null;
-//        boolean strictServerSessionEnabled = securityProps.getFirebaseProps().isEnableStrictServerSession();
-//        Cookie sessionCookie = cookieUtils.getCookie("session");
-//        String token = securityService.getBearerToken(request);
-//        logger.info(token);
-//        try {
-//            if (sessionCookie != null) {
-//                session = sessionCookie.getValue();
-//                decodedToken = FirebaseAuth.getInstance().verifySessionCookie(session,
-//                        securityProps.getFirebaseProps().isEnableCheckSessionRevoked());
-//                type = Credentials.CredentialType.SESSION;
-//            } else if (!strictServerSessionEnabled) {
-//                if (token != null && !token.equalsIgnoreCase("undefined")) {
-//                    decodedToken = FirebaseAuth.getInstance().verifyIdToken(token);
-//                    type = Credentials.CredentialType.ID_TOKEN;
-//                }
-//            }
-//        } catch (FirebaseAuthException e) {
-//            e.printStackTrace();
-//            log.error("Firebase Exception:: ", e.getLocalizedMessage());
-//        }
-//        User user = firebaseTokenToUserDto(decodedToken);
-//        if (user != null) {
-//            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user,
-//                    new Credentials(type, decodedToken, token, session), null);
-//            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-//            SecurityContextHolder.getContext().setAuthentication(authentication);
-//        }
-//    }
-//
-//    private User firebaseTokenToUserDto(FirebaseToken decodedToken) {
-//        User user = null;
-//        if (decodedToken != null) {
-//            user = new User();
-//            user.setUid(decodedToken.getUid());
-//            user.setName(decodedToken.getName());
-//            user.setEmail(decodedToken.getEmail());
-//            user.setPicture(decodedToken.getPicture());
-//            user.setIssuer(decodedToken.getIssuer());
-//            user.setEmailVerified(decodedToken.isEmailVerified());
-//        }
-//        return user;
-//    }
-
-// This method is used to avoid filter for specific URL's
-//    @Override
-//    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-//        System.out.println(request.getServletPath());
-//        return new AntPathRequestMatcher("/auth/login").matches(request);
-//    }
 }

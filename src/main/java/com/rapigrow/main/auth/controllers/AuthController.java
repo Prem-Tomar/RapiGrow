@@ -9,10 +9,15 @@ import com.rapigrow.main.auth.dto.UserResponseDTO;
 import com.rapigrow.main.auth.services.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "auth")
+@RequestMapping("auth")
 public class AuthController {
     @Autowired
     private ObjectMapper objectMapper;
@@ -20,7 +25,8 @@ public class AuthController {
     @Autowired
     private SecurityService service;
 
-    //@RequestMapping(value = "/add",method = RequestMethod.GET)
+    // Keeping it for future reference
+    // @RequestMapping(value = "/add",method = RequestMethod.GET)
     @GetMapping("/add")
     public int add(@RequestParam int a, @RequestParam int b) {
         return a + b;
@@ -35,8 +41,8 @@ public class AuthController {
     }
 
     @GetMapping("login")
-    public ResponseEntity<String> login() throws FirebaseAuthException {
-        return ResponseEntity.ok(service.generateTokenForUser("prem.tomar.gwl@gmail.com"));
+    public ResponseEntity<String> login(@RequestParam String email) throws FirebaseAuthException {
+        return ResponseEntity.ok(service.generateTokenForUser(email));
     }
 
     @PostMapping("signup")
@@ -58,7 +64,6 @@ public class AuthController {
     // TODO: Validate username and password, fetch the UID from database
     // TODO: Use uid to JWT token for user
     // TODO: Change user request and response DTOs to reflect actual user information consumed and produced
-
 
 
 }
