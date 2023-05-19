@@ -9,19 +9,14 @@ import com.rapigrow.main.auth.dto.UserResponseDTO;
 import com.rapigrow.main.auth.services.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("auth")
 public class AuthController {
     @Autowired
     private ObjectMapper objectMapper;
-
     @Autowired
     private SecurityService service;
 
@@ -45,6 +40,7 @@ public class AuthController {
         return ResponseEntity.ok(service.generateTokenForUser(email));
     }
 
+
     @PostMapping("signup")
     public ResponseEntity<UserResponseDTO> createUser(@RequestBody UserRequestDTO body) throws FirebaseAuthException {
         try {
@@ -55,6 +51,8 @@ public class AuthController {
         } catch (Exception e) {
             throw e;
         }
+
+
     }
 
     // TODO: create signup for user using firebase sdk

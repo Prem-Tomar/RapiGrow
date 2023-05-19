@@ -1,8 +1,7 @@
-package com.rapigrow.main.bluecollar.controllers;
+package com.rapigrow.main.users.controllers;
 
-import com.rapigrow.main.bluecollar.entities.JobProvider;
-import com.rapigrow.main.bluecollar.service.JobProviderService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.rapigrow.main.users.entities.JobProvider;
+import com.rapigrow.main.users.service.JobProviderService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

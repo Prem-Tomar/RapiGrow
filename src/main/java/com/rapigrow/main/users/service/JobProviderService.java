@@ -1,7 +1,7 @@
-package com.rapigrow.main.bluecollar.service;
+package com.rapigrow.main.users.service;
 
-import com.rapigrow.main.bluecollar.entities.JobProvider;
-import com.rapigrow.main.bluecollar.entities.JobSeeker;
+import com.rapigrow.main.users.entities.JobProvider;
+import com.rapigrow.main.users.entities.JobSeeker;
 
 
 public interface JobProviderService {

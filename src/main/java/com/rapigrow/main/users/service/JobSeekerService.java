@@ -1,8 +1,6 @@
-package com.rapigrow.main.bluecollar.service;
+package com.rapigrow.main.users.service;
 
-import com.rapigrow.main.bluecollar.entities.JobProvider;
-import com.rapigrow.main.bluecollar.entities.JobSeeker;
-import org.springframework.stereotype.Component;
+import com.rapigrow.main.users.entities.JobSeeker;
 
 
 public interface JobSeekerService {
@@ -15,7 +13,7 @@ public interface JobSeekerService {
 
     public void updatePassword(JobSeeker js, String newPassword);
 
-    public void changeTimmings(String date, String time);
+    public void changeTimmings( JobSeeker js,String date, String time);
 
 
     public void addAadhar(JobSeeker jobseeker,long aadhar);
