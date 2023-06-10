@@ -1,4 +1,4 @@
-package com.rapigrow.main.common.entities.models;
+package com.rapigrow.main.users.models;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

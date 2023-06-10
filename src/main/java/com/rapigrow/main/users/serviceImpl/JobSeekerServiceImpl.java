@@ -1,6 +1,7 @@
-package com.rapigrow.main.users.service;
+package com.rapigrow.main.users.serviceImpl;
 
 import com.rapigrow.main.users.entities.JobSeeker;
+import com.rapigrow.main.users.service.JobSeekerService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ public class JobSeekerServiceImpl implements JobSeekerService {
     public void deleteJobSeeker(long sId) {
         JobSeeker jobseekertobedeleted=null;
         for (JobSeeker e : slist) {
-            if (e.getSId() == sId) {
+            if (e.getId() == sId) {
 
                 jobseekertobedeleted = e;
             }
@@ -33,17 +34,17 @@ public class JobSeekerServiceImpl implements JobSeekerService {
 
     @Override
     public void updateEmail(JobSeeker js, String newEmail) {
-                   js.setSEmail(newEmail);
+                   js.setEmail(newEmail);
     }
 
     @Override
     public void updateMobile(JobSeeker js, long newMobile) {
-     js.setSMobile(newMobile);
+     js.setMobile(newMobile);
     }
 
     @Override
     public void updatePassword(JobSeeker js, String newPassword) {
-         js.setSPassword(newPassword);
+         js.setPassword(newPassword);
     }
 
     @Override
@@ -54,6 +55,6 @@ public class JobSeekerServiceImpl implements JobSeekerService {
 
     @Override
     public void addAadhar(JobSeeker jobseeker, long aadhar) {
-       jobseeker.setSAadhar(aadhar);
+       jobseeker.setAadhar(aadhar);
     }
 }

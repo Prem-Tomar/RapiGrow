@@ -1,7 +1,8 @@
-package com.rapigrow.main.users.service;
+package com.rapigrow.main.users.serviceImpl;
 
 import com.rapigrow.main.users.entities.JobProvider;
 import com.rapigrow.main.users.entities.JobSeeker;
+import com.rapigrow.main.users.service.JobProviderService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class JobProvideServiceImpl implements JobProviderService {
     public void deleteJobProvider(long pId) {
         JobProvider jp = new JobProvider();
         for (JobProvider e : plist) {
-            long x = e.getPId();
+            long x = e.getId();
             if (x == pId) {
                 plist.remove(e);
             }
@@ -35,17 +36,17 @@ public class JobProvideServiceImpl implements JobProviderService {
 
     @Override
     public void updateEmail(JobProvider jp, String newEmail) {
-        jp.setPEmail(newEmail);
+        jp.setEmail(newEmail);
     }
 
     @Override
     public void updateMobile(JobProvider jp, long newMobile) {
-        jp.setPMobile(newMobile);
+        jp.setMobile(newMobile);
     }
 
     @Override
     public void updatePassword(JobProvider jobprovider, String newPassword) {
-        jobprovider.setPPassword(newPassword);
+        jobprovider.setPassword(newPassword);
     }
 
     @Override
@@ -62,6 +63,6 @@ public class JobProvideServiceImpl implements JobProviderService {
 
     @Override
     public void addAadhar(JobProvider jobprovider, long aadhar) {
-                      jobprovider.setPAadhar(aadhar);
+                      jobprovider.setAadhar(aadhar);
     }
 }
